@@ -22,7 +22,7 @@ namespace Refactoring.Web.Services.OrderProcessors
       {
          var biz = _dealService.GetRandomLocalBusiness();
          var deal = _dealService.GenerateDeal(DateTime.Now);
-         var result = await _chamberOfCommerceApi.GetFor("Middleton");
+         var result = await _chamberOfCommerceApi.GetImageAndThumbnailDataFor("Middleton");
          var advert = new Advert
          {
             CreatedOn = DateTime.Now,

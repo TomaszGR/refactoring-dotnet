@@ -9,22 +9,26 @@ namespace Refactoring.Web.Services.OrderProcessors
    {
       private readonly IChamberOfCommerceApi _chamberOfCommerceApi;
       private readonly IAdvertPrinter _advertPrinter;
+      private readonly IDateTimeResolver _dateTimeResolver;
 
-      public CambridgeOrderProcessor(IChamberOfCommerceApi chamberOfCommerceApi, IAdvertPrinter advertPrinter)
+      public CambridgeOrderProcessor(IChamberOfCommerceApi chamberOfCommerceApi, IAdvertPrinter advertPrinter, IDateTimeResolver dateTimeResolver)
       {
          _chamberOfCommerceApi = chamberOfCommerceApi;
          _advertPrinter = advertPrinter;
+         _dateTimeResolver = dateTimeResolver;
       }
 
       public override async Task<Order> PrintAdvertAndUpdateOrder(Order order)
       {
-         var advert = new Advert();
-         advert.CreatedOn = DateTime.Now;
-         advert.Heading = "Cambridge Bakery";
-         advert.Content = "Custom Birthday and Wedding Cakes";
-         if (DateTime.Now.DayOfWeek == DayOfWeek.Tuesday)
+         var advert = new Advert
          {
-            var result = await _chamberOfCommerceApi.GetFor("Middleton");
+            CreatedOn = DateTime.Now,
+            Heading = "Cambridge Bakery",
+            Content = "Custom Birthday and Wedding Cakes"
+         };
+         if (_dateTimeResolver.IsItTuesday())
+         {
+            var result = await _chamberOfCommerceApi.GetImageAndThumbnailDataFor("Middleton");
             advert.ImageUrl = result.ThumbnailUrl;
          }
          order.Advert = advert;

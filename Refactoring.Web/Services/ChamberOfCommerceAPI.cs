@@ -24,7 +24,7 @@ namespace Refactoring.Web.Services
       /// </summary>
       /// <param name="district"></param>
       /// <returns></returns>
-      public async Task<DataResult> GetFor(string district)
+      public async Task<DataResult> GetImageAndThumbnailDataFor(string district)
       {
          using var client = new HttpClient();
          var request = new HttpRequestMessage(HttpMethod.Get, BuidUrlForDistrict(district));
