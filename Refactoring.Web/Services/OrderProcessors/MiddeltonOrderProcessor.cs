@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Refactoring.Web.Services.OrderProcessors
 {
-   public class MiddeltonOrderProcessor
+   public class MiddeltonOrderProcessor : OrderProcessor
    {
       private readonly IChamberOfCommerceApi _chamberOfCommerceApi;
       private readonly IAdvertPrinter _advertPrinter;
@@ -18,7 +18,7 @@ namespace Refactoring.Web.Services.OrderProcessors
          _dealService = dealService;
       }
 
-      public async Task<Order> PrintAdvertAndUpdateOrder(Order order)
+      public override async Task<Order> PrintAdvertAndUpdateOrder(Order order)
       {
          var biz = _dealService.GetRandomLocalBusiness();
          var deal = _dealService.GenerateDeal(DateTime.Now);

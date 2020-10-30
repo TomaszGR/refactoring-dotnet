@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Refactoring.Web.Services;
 using Refactoring.Web.Services.Interfaces;
+using Refactoring.Web.Services.Printers;
 
 namespace Refactoring.Web
 {
@@ -23,6 +24,8 @@ namespace Refactoring.Web
          services.AddTransient<IOrderService, OrderService>();
          services.AddTransient<IDealService, DealService>();
          services.AddTransient<IChamberOfCommerceApi, ChamberOfCommerceApi>();
+         services.AddTransient<IDistrictOrderFactory, DistrictOrderFactory>();
+         services.AddTransient<IAdvertPrinter, AdvertPrinter>();
       }
 
       public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
