@@ -31,12 +31,15 @@ namespace Refactoring.Web.Controllers
             District = selectedDistrict,
             Total = orderAmount
          };
+
          order = await _orderService.ProcessOrder(order);
+
          if (order != null)
          {
             _logger.LogDebug($"Processed order: {order.Id}");
             return View(order); 
          }
+
          _logger.LogError("Error processing order!");
          return StatusCode(500);
       }

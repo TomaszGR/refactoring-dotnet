@@ -10,12 +10,12 @@ namespace Refactoring.Web.Services.Helpers
       public static class District
       {
          //expression-bodied properties
-         public static string Cambridge { get => "Cambridge"; }
-         public static string Downtown => "Downtown";
-         public static string Country => "Country";
-         public static string Czaple => "Czaple";
+         public static string Cambridge { get => "cambridge"; }
+         public static string Middleton => "middleton";
+         public static string County => "county";
+         public static string Downtown => "downtown";
 
-         public static IEnumerable<string> StandardDistricts => new List<string> { Cambridge, Downtown, Country, Czaple };
+         public static IEnumerable<string> StandardDistricts => new List<string> { Cambridge, Downtown, County, Middleton };
       }
    }
 }
