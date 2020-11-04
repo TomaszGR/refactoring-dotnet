@@ -48,5 +48,43 @@ namespace Refactoring.Web.Tests.OrderProcessors
          result.Advert.ImageUrl.Should().Be(fakeDataResult.ThumbnailUrl);
 
       }
+
+      [Fact]
+      public async void GivenDateNotTuesday_ImageUrl_NotSet_OnOrderAdvert()
+      {
+         //Arrange
+         var testOrder = new Order()
+         {
+            Id = "foo"
+         };
+
+         var fakeAdvertPrinter = new Mock<IAdvertPrinter>();
+         var fakeDateTimeResolver = new Mock<IDateTimeResolver>();
+         var fakeChamberOfCommerceApi = new Mock<IChamberOfCommerceApi>();
+
+         var fakeDataResult = new DataResult()
+         {
+            ThumbnailUrl = "http://foo.pl",
+            Title = "Title boo"
+         };
+
+         fakeChamberOfCommerceApi
+            .Setup(m => m.GetImageAndThumbnailDataFor(It.IsAny<string>()))
+            .Returns(Task.FromResult(fakeDataResult));
+
+         fakeDateTimeResolver.Setup(m => m.IsItTuesday()).Returns(false);
+
+         var sut = new CambridgeOrderProcessor(
+            fakeChamberOfCommerceApi.Object,
+            fakeAdvertPrinter.Object,
+            fakeDateTimeResolver.Object);
+
+         //Act
+         var result = await sut.PrintAdvertAndUpdateOrder(testOrder);
+
+         //Assert
+         result.Advert.ImageUrl.Should().BeNull();
+
+      }
    }
 }

@@ -20,7 +20,7 @@ namespace Refactoring.Web.Services.OrderProcessors
 
       public override async Task<Order> PrintAdvertAndUpdateOrder(Order order)
       {
-         var biz = _dealService.GetRandomLocalBusiness();
+         var biz = _dealService.RandomLocalBusiness;
          var deal = _dealService.GenerateDeal(DateTime.Now);
          var result = await _chamberOfCommerceApi.GetImageAndThumbnailDataFor("Middleton");
          var advert = new Advert

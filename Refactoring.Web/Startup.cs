@@ -28,6 +28,7 @@ namespace Refactoring.Web
          services.AddTransient<IDistrictOrderFactory, DistrictOrderFactory>();
          services.AddTransient<IAdvertPrinter, AdvertPrinter>();
          services.AddTransient<IDateTimeResolver, DateTimeResolver>();
+         services.AddTransient<IRandomHelper, RandomHelper>();
       }
 
       public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
