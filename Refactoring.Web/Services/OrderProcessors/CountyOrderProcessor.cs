@@ -23,7 +23,7 @@ namespace Refactoring.Web.Services.OrderProcessors
             Content = "Kids eat free every Thursday night"
          };
          order.Advert = advert;
-         _advertPrinter.Print(advert, false);
+         _advertPrinter.PrintCustom(advert);
          order.Status = "Complete";
 
          return order;

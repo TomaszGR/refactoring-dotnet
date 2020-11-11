@@ -4,6 +4,8 @@ namespace Refactoring.Web.Services.Interfaces
 {
    public interface IAdvertPrinter
    {
-      void Print(Advert advert, bool IsDefaultAdvert);
+      void PrintCustom(Advert advert);
+      void PrintDefault(Advert advert);
+
    }
 }

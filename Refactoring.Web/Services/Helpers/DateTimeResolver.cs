@@ -12,5 +12,12 @@ namespace Refactoring.Web.Services.Helpers
       {
          return DateTime.Now.DayOfWeek == DayOfWeek.Tuesday;
       }
+
+      public bool IsItWeekend()
+      {
+         var weekendDays = new List<DayOfWeek> { DayOfWeek.Saturday, DayOfWeek.Sunday};
+         return weekendDays.Contains(DateTime.Now.DayOfWeek);
+      }
+
    }
 }
